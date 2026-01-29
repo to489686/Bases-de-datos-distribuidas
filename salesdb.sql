@@ -83,13 +83,6 @@ insert into customerAddress (customerAddresID, customerID, addressID, type, posi
 		(4, 4, 4, 'Home', 'Primary'),
 		(5, 5, 5, 'Home', 'Primary');	
 
-insert into customerAddress (customerAddresID, customerID, addressID, type, position) values
-		(1, 1, 1, 'Home', 'Primary'),
-		(2, 2, 2, 'Home', 'Primary'),
-		(3, 3, 3, 'Home', 'Primary'),
-		(4, 4, 4, 'Home', 'Primary'),
-		(5, 5, 5, 'Home', 'Primary');	
-		
 insert into supplier (supplierID, name, phone, emmail, addressID) values
 		(1, 'TechSupplies Inc.', '555-0201', 'sales@techsupplies.com', 1),
 		(2, 'Office Solutions Co.', '555-0202', 'contact@officesolutions.com', 2),
@@ -110,3 +103,10 @@ insert into customerOrder (orderID, customerID, date, total, paymentMethod, stat
 		(3, 3, '2024-01-17', 62.48, 'Credit Card', 'Shipped'),
 		(4, 4, '2024-01-18', 47.25, 'Bank Transfer', 'Pending'),
 		(5, 5, '2024-01-19', 234.74, 'Credit Card', 'Delivered');		
+		
+insert into orderProduct (orderProductId, orderID, productID, quanty, price) values
+		(1, 1, 1, 2, 25.99),
+		(2, 1, 3, 3, 4.99),
+		(3, 2, 2, 1, 199.99),
+		(4, 3, 4, 1, 34.50),
+		(5, 3, 5, 2, 12.75);
