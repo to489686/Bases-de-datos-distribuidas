@@ -60,7 +60,7 @@ create table orderProduct(orderProductId int not null,
 		price float not null,
 		primary key (orderProductId),
 		foreign key(orderID) references customerOrder(orderID),
-		foreign key(product) references product(productID));
+		foreign key(productID) references product(productID));
 		
 insert into address (addressID, street, localy, city, postcode, state) values
 		(1, '123 Main Street', 'Downtown', 'New York', '10001', 'New York'),
