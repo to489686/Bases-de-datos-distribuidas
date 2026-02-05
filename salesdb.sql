@@ -114,7 +114,7 @@ insert into orderProduct (orderProductId, orderID, productID, quanty, price) val
 		(5, 3, 5, 2, 12.75);
 
 -- 1. Listar todos los clientes: *Obtén el customerID, name y email de todos los customer
-select customerID, name, emmail from customer;
+select customerID, name, email from customer;
 
 -- 2. Direcciones en una ciudad específica: *Muestra todas las direcciones que estén en la ciudad de Madrid
 select * from address where city = 'Madrid';
@@ -122,7 +122,29 @@ select * from address where city = 'Madrid';
 -- 3. Productos con precio mayor a 200: *Lista los productos cuyo precio sea mayor a 200
 select * from product where price > 200;
 -- 4. Pedidos ordenados por fecha: *Muestra todos los pedidos ordenados desde el más reciente al más antiguo
- select * from customerOrder order by date desc;
--- 5. Primeros 5 proveedores: *Obtén los primeros 5 proveedores ordenados alfabéticamente por nombre.
+select * from customerOrder 
+order by date desc;
+-- 5. Primeros 5 proveedores: *Obtén los primeros 5 proveedores ordenados alfabéticamente por nombre
+select * from supplier
+order by name asc limit 5;
+-- 6. Clientes y su ciudad: *Muestra el nombre del cliente y la ciudad donde vive
+select c.name as customer, a.city as city
+from customer c
+join address a on c.addressID = a.addressID;
+
+-- 7. Productos y su proveedor: *Lista el nombre del producto y el nombre de su proveedor
+select p.name as product, s.name as supplier
+from product p
+join supplier s on p.supplierID = s.supplierID
+
+-- 8. Pedidos de un cliente específico: *Muestra todos los pedidos realizados por el cliente con customerID = 10
+select * from customerOrder 
+where customerID = 10;
+
+-- 9. Cantidad de productos en cada pedido: *Muestra el ID del pedido y la cantidad de productos comprados en cada uno
+
+
+-- 10. Clientes con dirección de envío: *Lista los clientes que tienen una dirección de tipo Shipping
+
 
 
