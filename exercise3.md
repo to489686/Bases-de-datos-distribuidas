@@ -90,7 +90,8 @@ Consultas
 **Solución** ✅
 
   ```sql
-   select * from customerOrder order by date desc;
+   select * from customer
+   order by date desc;
 ```
 
 **Salida** 📌
@@ -108,13 +109,20 @@ Consultas
 **Solución** ✅
 
    ```sql
-   select * from address where city = 'Madrid';
+   select * from supplier
+   order by name asc limit 5;
 ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
-
+   | supplierID | name | phone | date | email | addressID |
+| --------- | --------- | --------- | ------- | --------- |
+| 3 | Global Distributors | 555-0203 | info@globaldist.com | 3 | 
+| 2 | Office Solutions Co. | 555-0202 | contact@officesolutions.com | 2 |
+| 5 | Prime Suppliers | 555-0205 | support@primesuppliers.com | 5 |
+| 4 | Quality Goods Ltd. | 555-0204 | orders@qualitygoods.com | 4 |
+| 1 | TechSupplies Inc. | 555-0201 | sales@techsupplies.com | 1 |
+				
 6. Clientes y su ciudad: *Muestra el nombre del cliente y la ciudad donde vive*.
    
 **Solución** ✅
