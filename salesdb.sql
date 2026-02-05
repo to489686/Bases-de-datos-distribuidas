@@ -95,7 +95,8 @@ insert into product (productID, name, type, amount, price, detail, supplierID) v
 		(2, 'Office Chair', 'Furniture', 50, 199.99, 'Executive office chair', 2),
 		(3, 'Notebook', 'Stationery', 500, 4.99, 'Hardcover notebook', 3),
 		(4, 'Desk Lamp', 'Lighting', 75, 34.50, 'LED desk lamp', 4),
-		(5, 'Coffee Mug', 'Kitchenware', 300, 12.75, 'Ceramic coffee mug', 5);
+		(5, 'Coffee Mug', 'Kitchenware', 300, 12.75, 'Ceramic coffee mug', 5),
+		(6, 'Gaming Laptop', 'Electronics', 10, 1299.99, 'High-performance gaming laptop', 1);
 		
 insert into customerOrder (orderID, customerID, date, total, paymentMethod, status) values
 		(1, 1, '2024-01-15', 145.97, 'Credit Card', 'Delivered'),
@@ -110,3 +111,4 @@ insert into orderProduct (orderProductId, orderID, productID, quanty, price) val
 		(3, 2, 2, 1, 199.99),
 		(4, 3, 4, 1, 34.50),
 		(5, 3, 5, 2, 12.75);
+
