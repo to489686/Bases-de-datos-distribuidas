@@ -12,7 +12,7 @@ create table address(addressID int not null,
 create table customer(customerID int not null,
 		name varchar(80) not null,
         phone varchar(15) not null,
-        emmail varchar(80) not null,
+        email varchar(80) not null,
         addressID int not null,
         primary key(customerID),
         foreign key(addressID) references address(addressID));
@@ -29,7 +29,7 @@ create table customerAddress(customerAddresID int not null,
 create table supplier(supplierID int not null,
 		name varchar(80) not null,
         phone varchar(15) not null,
-        emmail varchar(80) not null,
+        email varchar(80) not null,
         addressID int not null,
         primary key(supplierID),
         foreign key(addressID) references address(addressID));
@@ -70,7 +70,7 @@ insert into address (addressID, street, localy, city, postcode, state) values
 		(5, '654 Maple Drive', 'East Hills', 'Miami', '33101', 'Florida'),
 		(6, 'Calle Gran Vía 45', 'Centro', 'Madrid', '28013', 'Madrid');
 		
-insert into customer (customerID, name, phone, emmail, addressID) values
+insert into customer (customerID, name, phone, email, addressID) values
 		(1, 'John Smith', '555-0101', 'john.smith@email.com', 1),
 		(2, 'Maria Garcia', '555-0102', 'maria.garcia@email.com', 2),
 		(3, 'David Johnson', '555-0103', 'david.johnson@email.com', 3),
@@ -84,7 +84,7 @@ insert into customerAddress (customerAddresID, customerID, addressID, type, posi
 		(4, 4, 4, 'Home', 'Primary'),
 		(5, 5, 5, 'Home', 'Primary');	
 
-insert into supplier (supplierID, name, phone, emmail, addressID) values
+insert into supplier (supplierID, name, phone, email, addressID) values
 		(1, 'TechSupplies Inc.', '555-0201', 'sales@techsupplies.com', 1),
 		(2, 'Office Solutions Co.', '555-0202', 'contact@officesolutions.com', 2),
 		(3, 'Global Distributors', '555-0203', 'info@globaldist.com', 3),
@@ -123,4 +123,6 @@ select * from address where city = 'Madrid';
 select * from product where price > 200;
 -- 4. Pedidos ordenados por fecha: *Muestra todos los pedidos ordenados desde el más reciente al más antiguo
  select * from customerOrder order by date desc;
+-- 5. Primeros 5 proveedores: *Obtén los primeros 5 proveedores ordenados alfabéticamente por nombre.
+
 
