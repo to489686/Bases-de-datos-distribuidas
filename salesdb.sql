@@ -67,7 +67,8 @@ insert into address (addressID, street, localy, city, postcode, state) values
 		(2, '456 Oak Avenue', 'Northside', 'Chicago', '60601', 'Illinois'),
 		(3, '789 Pine Road', 'West End', 'Los Angeles', '90001', 'California'),
 		(4, '321 Elm Street', 'South Park', 'Houston', '77001', 'Texas'),
-		(5, '654 Maple Drive', 'East Hills', 'Miami', '33101', 'Florida');
+		(5, '654 Maple Drive', 'East Hills', 'Miami', '33101', 'Florida'),
+		(6, 'Calle Gran Vía 45', 'Centro', 'Madrid', '28013', 'Madrid');
 		
 insert into customer (customerID, name, phone, emmail, addressID) values
 		(1, 'John Smith', '555-0101', 'john.smith@email.com', 1),
@@ -111,4 +112,15 @@ insert into orderProduct (orderProductId, orderID, productID, quanty, price) val
 		(3, 2, 2, 1, 199.99),
 		(4, 3, 4, 1, 34.50),
 		(5, 3, 5, 2, 12.75);
+
+-- 1. Listar todos los clientes: *Obtén el customerID, name y email de todos los customer
+select customerID, name, emmail from customer;
+
+-- 2. Direcciones en una ciudad específica: *Muestra todas las direcciones que estén en la ciudad de Madrid
+select * from address where city = 'Madrid';
+
+-- 3. Productos con precio mayor a 200: *Lista los productos cuyo precio sea mayor a 200
+select * from product where price > 200;
+-- 4. Pedidos ordenados por fecha: *Muestra todos los pedidos ordenados desde el más reciente al más antiguo
+ select * from customerOrder order by date desc;
 
