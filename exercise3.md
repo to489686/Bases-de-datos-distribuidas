@@ -115,7 +115,7 @@ Consultas
 
 **Salida** 📌
 
-   | supplierID | name | phone | date | email | addressID |
+   | supplierID | name | phone | email | addressID |
 | --------- | --------- | --------- | ------- | --------- |
 | 3 | Global Distributors | 555-0203 | info@globaldist.com | 3 | 
 | 2 | Office Solutions Co. | 555-0202 | contact@officesolutions.com | 2 |
@@ -128,35 +128,55 @@ Consultas
 **Solución** ✅
 
    ```sql
-   select * from address where city = 'Madrid';
+   select c.name as customer, a.city as city
+from customer c
+join address a on c.addressID = a.addressID;
 ```
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
-
+   | customer | city |
+| --------- | --------- | 
+| John Smith | New York |
+| Maria Garcia | Chicago |
+| David Johnson | Los Angeles |
+| Sarah Williams | Houston |
+| Robert Brown | Miami |
+   	
 7. Productos y su proveedor: *Lista el nombre del producto y el nombre de su proveedor*.
    
 **Solución** ✅
 
    ```sql
-   select * from address where city = 'Madrid';
+   select p.name as product, s.name as supplier
+from product p
+join supplier s on p.supplierID = s.supplierID
 ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | product | supplier|
+   | --------- | --------- | 
+| Wireless Mouse | TechSupplies Inc.|
+| Office Chair |	Office Solutions Co.|
+|Notebook|	Global Distributors|
+|Desk Lamp | Quality Goods Ltd.|
+|Coffee Mug |	Prime Suppliers|
+|Gaming Laptop | TechSupplies Inc.|
 
 8. Pedidos de un cliente específico: *Muestra todos los pedidos realizados por el cliente con customerID = 10*.
    
 **Solución** ✅
 
    ```sql
-   select * from address where city = 'Madrid';
+  select * from customerOrder 
+where customerID = 10;
 ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   |orderID | customerID | date | total | paymentMethod | status |
+   | --------- | --------- | --------- | --------- | --------- | --------- |
+   | NULL | NULL | NULL | NULL |NULL | NULL |
 
 9. Cantidad de productos en cada pedido: *Muestra el ID del pedido y la cantidad de productos comprados en cada uno*.
    
