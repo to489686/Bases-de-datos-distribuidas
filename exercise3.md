@@ -38,51 +38,78 @@ OPCIÓN 2. Tabla con el resultado de la consulta.
 
 Consultas
 ---------------
-1. Listar todos los clientes: *Obtén el customerID, nombre y email de todos los clientes*.
+1. Listar todos los clientes: *Obtén el customerID, name y email de todos los customer*.
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select customerID, name, emmail from customer;
+```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
-   
+   | customerID | name | email |  
+| --------- | --------- | --------- | 
+| 1 | John Smith | john.smith@email.com |
+| 2 | Maria Garcia| maria.garcia@email.com |
+| 3 | David Johnson | david.johnson@email.com |
+| 4 | Sarah Williams | sarah.williams@email.com |
+| 5 | Robert Brown | robert.brown@email.com |
+		
 2. Direcciones en una ciudad específica: *Muestra todas las direcciones que estén en la ciudad de Madrid*.
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | addressID | street | localy | city | postcode | state |  
+| --------- | --------- | --------- | ------- | --------- | --------- |
+| 6 | Calle Gran Vía 45 | Centro | Madrid | 28013 | Madrid |
+
+					
    
 3. Productos con precio mayor a 200: *Lista los productos cuyo precio sea mayor a 200*.
    
 **Solución** ✅
 
-   TODO script SQL
-
+   ```sql
+   select * from product where price > 200;
+```
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | productID | name | type | amount | price | detail | supplierID |
+| --------- | --------- | --------- | ------- | --------- | --------- | --------- |
+| 6 | Gaming Laptop | Electronics | 10 | 1299.99 | High-performance gaming laptop | 1 |
 
 4. Pedidos ordenados por fecha: *Muestra todos los pedidos ordenados desde el más reciente al más antiguo*.
    
 **Solución** ✅
 
-   TODO script SQL
+  ```sql
+   select * from customerOrder order by date desc;
+```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | orderID | customerID | date | total | paymentMethod | status |
+| --------- | --------- | --------- | ------- | --------- | --------- |
+| 5 | 5 | 2024-01-19 | 234.74 | Credit Card | Delivered |
+| 4 | 4 | 2024-01-18 | 47.25 | Bank Transfer | Pending |
+| 3 | 3 | 2024-01-17 | 62.48 | Credit Card | Shipped |
+| 2 | 2 | 2024-01-16 | 199.99 | PayPal | Processing |
+| 1 | 1 | 2024-01-15 | 145.97 | Credit Card | Delivered |
    
 5. Primeros 5 proveedores: *Obtén los primeros 5 proveedores ordenados alfabéticamente por nombre*.
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+```
 
 **Salida** 📌
 
@@ -92,8 +119,9 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
-
+   ```sql
+   select * from address where city = 'Madrid';
+```
 **Salida** 📌
 
    TODO listado de atributos y tuplas
@@ -102,7 +130,9 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+```
 
 **Salida** 📌
 
@@ -112,7 +142,9 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+```
 
 **Salida** 📌
 
@@ -122,7 +154,9 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+```
 
 **Salida** 📌
 
@@ -132,7 +166,9 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+   select * from address where city = 'Madrid';
+``` 
 
 **Salida** 📌
 
