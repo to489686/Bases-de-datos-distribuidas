@@ -183,12 +183,22 @@ where customerID = 10;
 **Solución** ✅
 
    ```sql
-   select * from address where city = 'Madrid';
+   select 
+    orderid,
+    count(productid) as productCount,
+    sum(quanty) as totalQuanty
+from orderProduct
+group by orderId;
 ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+	
+   
+   orderID	productCount	totalQuanty
+1	2	5
+2	1	1
+3	2	3
 
 10. Clientes con dirección de envío: *Lista los clientes que tienen una dirección de tipo Shipping*.
    
