@@ -144,12 +144,13 @@ where customerID = 10;
 -- 9. Cantidad de productos en cada pedido: *Muestra el ID del pedido y la cantidad de productos comprados en cada uno
 select 
     orderid,
-    count(productid) as product_count,
-    sum(quanty) as total_quanty
-from orderproduct
-group by orderid;
+    count(productid) as productCount,
+    sum(quanty) as totalQuanty
+from orderProduct
+group by orderId;
 
 -- 10. Clientes con dirección de envío: *Lista los clientes que tienen una dirección de tipo Shipping
+
 
 
 
