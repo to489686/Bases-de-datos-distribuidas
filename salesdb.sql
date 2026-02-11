@@ -151,6 +151,111 @@ group by orderId;
 
 -- 10. Clientes con dirección de envío: *Lista los clientes que tienen una dirección de tipo Shipping
 
+-- Bloque 4. Consultas SQL nivel intermediO--------------------------------------------------------------------------
+--1. *Total de pedidos por cliente*. Muestra el nombre del cliente y la cantidad total de pedidos que ha realizado.
+select 
+    c.name as customer_name,
+    count(co.orderid) as total_orders
+from customer c
+left join customerorder co on c.customerid = co.customerid
+group by c.customerid, c.name
+order by total_orders desc;
+
+--2. *Total gastado por cliente*. Obtén el nombre del cliente y el importe total gastado en todos sus pedidos.
+select 
+    c.name as customer_name,
+    sum(co.total) as total_amount
+from customer c
+join customerorder co on c.customerid = co.customerid
+group by c.customerid, c.name
+order by total_amount desc;
+--3. *Productos más caros por proveedor*. Muestra el proveedor y el precio máximo de los productos que suministra.
+select 
+    s.name as supplier_name,
+    round(max(p.price), 2) as max_price
+from supplier s
+join product p on s.supplierid = p.supplierid
+group by s.supplierid, s.name
+order by max_price desc;
+
+--4. *Pedidos con más de 3 productos*. Lista los pedidos cuyo total de unidades compradas sea mayor a 3.
+select 
+    orderid,
+    sum(quanty) as total_units
+from orderproduct
+group by orderid
+having sum(quanty) > 3
+order by total_units desc;
+
+--5. *Ventas totales por producto*. Muestra el nombre del producto y el total de unidades vendidas.
+select 
+    p.name as product_name,
+    coalesce(sum(op.quanty), 0) as total_units_sold
+from product p
+left join orderproduct op on p.productid = op.productid
+group by p.productid, p.name
+order by total_units_sold desc;
+
+--6. *Clientes que han gastado más de $1,000.00*. Lista los clientes cuyo gasto total sea mayor a 1000.
+insert into customerorder values 
+(6, 5, '2024-02-15', 850.50, 'credit card', 'delivered');
+
+select 
+    c.name as customer_name,
+    round(sum(co.total), 2) as total_amount
+from customer c
+join customerorder co on c.customerid = co.customerid
+group by c.customerid, c.name
+having sum(co.total) > 1000
+order by total_amount desc;
+
+--7. *Promedio de precio por tipo de producto*. Obtén el precio promedio de los productos por cada tipo.
+select 
+    p.type as product_type,
+    round(avg(p.price), 2) as average_price,
+    count(p.productid) as total_products
+from product p
+group by p.type
+order by average_price desc;
+
+--8. *Proveedores con más de 5 productos*. Muestra los proveedores que suministran más de 5 productos.
+insert into product values 
+(8, 'wireless keyboard', 'electronics', 50, 89.99, 'bluetooth keyboard', 1),
+(9, 'hdmi cable', 'electronics', 200, 15.99, '6ft hdmi cable', 1),
+(10, 'usb hub', 'electronics', 150, 29.99, '4-port usb hub', 1),
+(11, 'laptop stand', 'accessories', 75, 45.99, 'adjustable laptop stand', 1),
+(12, 'mouse pad', 'accessories', 300, 12.99, 'gaming mouse pad', 1);
+
+select 
+    s.name as supplier_name,
+    count(p.productid) as total_products
+from supplier s
+join product p on s.supplierid = p.supplierid
+group by s.supplierid, s.name
+having count(p.productid) > 5
+order by total_products desc;
+
+--9. *Pedidos con información del cliente*. Muestra el ID del pedido, la fecha y el nombre del cliente.
+select 
+    co.orderid as orderId,
+    co.date as orderDate,
+    c.name as customerName
+from customerorder co
+join customer c on co.customerid = c.customerid
+order by co.date desc;
+
+--10. *Clientes sin pedidos*. Lista los clientes que no han realizado ningún pedido.
+insert into customer values 
+(6, 'lisa martinez', '555-0106', 'lisa.martinez@email.com', 1);
+
+select 
+    c.name as customer_name,
+    c.phone,
+    c.email as email
+from customer c
+left join customerorder co on c.customerid = co.customerid
+where co.orderid is null
+order by c.name;
 
 
 
