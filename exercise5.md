@@ -46,22 +46,73 @@ Consultas
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+-- Forma simple
+select c.name as customerName,
+    round(sum(co.total), 2) as totalAmount
+from customer c
+join customerorder co on c.customerid = co.customerid
+group by c.customerid, c.name
+order by totalAmount desc
+limit 1;
+
+-- Si se existieran dos o mas clientes empatados 
+select c.name as customerName,
+    round(sum(co.total), 2) as totalAmount
+from customer c
+join customerorder co on c.customerid = co.customerid
+group by c.customerid, c.name
+having sum(co.total) = (
+    select max(customer_total)
+    from (
+        select sum(total) as customer_total
+           from customerorder
+           group by customerid
+    ) as totals
+);
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | customerName | totalAmount |
+   |--------|--------|
+   |Robert Brown	|1085.24|
    
 2. 🧠 *RETO 2: Producto más vendido (en unidades)*. Identifica el producto más vendido considerando la cantidad total de unidades vendidas.
 
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+-- Forma simple
+select  p.name as productName,
+   sum(op.quanty) as totalUnitsSold
+	from product p
+	join orderproduct op on p.productId = op.productId
+	group by p.productId, p.name
+	order by totalUnitsSold desc
+	limit 1;
+
+-- Si se existieran dos o mas productos vendidos
+select p.name as productName,
+	sum(op.quanty) as totalUnitSold
+    from product p
+    join orderroduct op on p.productID = op.productID
+    group by p.productID, p.name
+    having sum(op.quanty) = (
+		select max(productUnids)
+        from ( select sum(quanty) as productUnids
+			from orderproduct
+            group by productID
+            ) as totals
+		);
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+   | productName | totalUnitSold |
+   |--------|--------|
+   |Robert Brown	|1085.24|
    
 3. 🧠 *RETO 3: Total de ventas por ciudad*. Muestra el total de ventas (importe) agrupado por ciudad del cliente.
 
@@ -158,4 +209,5 @@ Consultas
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
