@@ -249,13 +249,66 @@ insert into customer values
 (6, 'lisa martinez', '555-0106', 'lisa.martinez@email.com', 1);
 
 select 
-    c.name as customer_name,
+    c.name as customerName,
     c.phone,
     c.email as email
 from customer c
 left join customerorder co on c.customerid = co.customerid
 where co.orderid is null
 order by c.name;
+
+--Bloque 4. Consultas SQL tipo examen
+--🧠 *RETO 1: Cliente con mayor gasto total*. Obtén el cliente que más dinero ha gastado en pedidos. Muestra su nombre y el total gastado.
+-- Forma simple
+select 
+    c.name as customerName,
+    round(sum(co.total), 2) as totalAmount
+	from customer c
+	join customerorder co on c.customerId = co.customerId
+	group by c.customerId, c.name
+	order by totalAmount desc
+	limit 1;
+
+-- Si se existieran dos o mas clientes empatados 
+select 
+    c.name as customerName,
+    round(sum(co.total), 2) as totalAmount
+	from customer c
+	join customerorder co on c.customerId = co.customerId
+	group by c.customerid, c.name
+	having sum(co.total) = (
+    select max(customerTotal)
+    from (
+        select sum(total) as customerTotal
+        	from customerOrder
+       		group by customerId
+    ) as totals
+	);
+
+--2. 🧠 *RETO 2: Producto más vendido (en unidades)*. Identifica el producto más vendido considerando la cantidad total de unidades vendidas.
+-- Forma simple
+select  p.name as productName,
+   sum(op.quanty) as totalUnitsSold
+	from product p
+	join orderproduct op on p.productId = op.productId
+	group by p.productId, p.name
+	order by totalUnitsSold desc
+	limit 1;
+
+-- Si se existieran dos o mas productos vendidos
+select p.name as productName,
+	sum(op.quanty) as totalUnitSold
+    from product p
+    join orderroduct op on p.productID = op.productID
+    group by p.productID, p.name
+    having sum(op.quanty) = (
+		select max(productUnids)
+        from ( select sum(quanty) as productUnids
+			from orderproduct
+            group by productID
+            ) as totals
+		);
+
 
 
 
