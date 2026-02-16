@@ -258,8 +258,8 @@ order by totalOrders desc;
 **Solución** ✅
 
    ```sql
-select paymentmethod as paymentMethod,
-    count(orderid) as totalOrders,
+select payMentmethod as paymentMethod,
+    count(orderId) as totalOrders,
     round(sum(total), 2) as totalRevenue
 from customerOrder
 group by paymentMethod
@@ -325,6 +325,7 @@ order by numberOfCities desc;
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
