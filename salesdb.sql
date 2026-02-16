@@ -378,6 +378,42 @@ group by c.customerId, c.name
 having sum(case when co.status = 'cancelled' then 1 else 0 end) = 0
 order by totalOrders desc;
 
+--RETO 8: Ingreso total por método de pago*. Muestra el ingreso total generado por cada método de pago.
+select paymentmethod as paymentMethod,
+    count(orderid) as totalOrders,
+    round(sum(total), 2) as totalRevenue
+from customerOrder
+group by paymentMethod
+order by totalRevenue desc;
+
+--RETO 9: Pedidos con más de un producto distinto*. Lista los pedidos que incluyen más de un producto diferente.
+select orderId,
+    count(distinct productId) as distinctProducts,
+    sum(quanty) as totalUnits
+from orderProduct
+group by orderId
+having count(distinct productId) > 1
+order by distinctProducts desc, totalUnits desc;
+
+--RETO 10: Clientes con pedidos en más de una ciudad. Encuentra los clientes que hayan realizado pedidos desde direcciones en más de una ciudad.
+insert into address values (8, '789 Beach Avenue', 'South Beach', 'Miami', '33102', 'Florida');
+insert into address values (9, '123 Orlando Street', 'Tourist', 'Orlando', '32801', 'Florida');
+
+insert into customeraddress values (7, 5, 8, 'Vacation', 'Secondary');
+insert into customeraddress values (8, 5, 9, 'Business', 'Tertiary');
+
+select c.name as customerName,
+    count(distinct a.city) as numberOfCities,
+    group_concat(distinct a.city order by a.city separator ', ') as cities
+from customer c
+join customerOrder co on c.customerId = co.customerId
+join customerAddress ca on c.customerId = ca.customerId
+join address a on ca.addressId = a.addressId
+group by c.customerId, c.name
+having count(distinct a.city) > 1
+order by numberOfCities desc;
+
+
 
 
 
