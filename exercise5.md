@@ -119,54 +119,138 @@ select p.name as productName,
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+select a.city as customerCity,
+    round(sum(co.total), 2) as totalSales
+from customer c
+join address a on c.addressId = a.addressId
+join customerorder co on c.customerId = co.customerId
+group by a.city
+order by totalSales desc;
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| customerCity | totalSales |
+|--------|--------|
+|Miami	|1085.24|
+|Chicago	|199.99|
+|New York	|145.97|
+|Los Angeles	|62.48|
+|Houston|	47.25|
 
 4. 🧠 *RETO 4: Clientes con más de una dirección*. Lista los clientes que tienen más de una dirección asociada.
 
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+select c.name as customerName,
+    count(ca.addressId) as numberOfAddresses
+from customer c
+join customeraddress ca on c.customerId = ca.customerId
+group by c.customerId, c.name
+having count(ca.addressId) > 1
+order by numberOfAddresses desc;
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| customerName | numberOfAddresses |
+|--------|--------|
+|Maria Garcia |2|
    
 5. 🧠 *RETO 5: Pedidos con total superior al promedio*. Obtén los pedidos cuyo total sea mayor al promedio de todos los pedidos.
 
    
 **Solución** ✅
 
-   TODO script SQL
+  ```sql
+select orderId,
+    customerId,
+    date,
+    round(total, 2) as orderTotal,
+    status
+from customerOrder
+where total > (select avg(total) from customerOrder)
+order by total desc;
+
+  ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+|orderId |customerId| date |orderTotal |status|
+|--------|--------|--------|--------|--------|
+|6|	5|	|2024-02-15|	850.5|	delivered|
 
 6. 🧠 *RETO 6: Proveedor con más productos vendidos*. Identifica el proveedor cuyos productos se han vendido en mayor cantidad de unidades.
 
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+-- Forma simple
+select s.name as supplierName,
+    sum(op.quanty) as totalUnitsSold
+from supplier s
+join product p on s.supplierId = p.supplierId
+join orderProduct op on p.productId = op.productId
+group by s.supplierId, s.name
+order by totalUnitsSold desc
+limit 1;
+-- Si se existieran dos o mas proveedor empatados
+select s.name as supplierName,
+    sum(op.quanty) as totalUnitsSold
+from supplier s
+join product p on s.supplierId = p.supplierId
+join orderProduct op on p.productId = op.productId
+group by s.supplierId, s.name
+having sum(op.quanty) = (
+    select max(unitsSold)
+    from (
+        select sum(op2.quanty) as unitsSold
+        from supplier s2
+        join product p2 on s2.supplierId = p2.supplierId
+        join orderProduct op2 on p2.productId = op2.productId
+        group by s2.supplierId
+    ) as supplierUnits
+)
+order by totalUnitsSold desc;
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| supplierName | totalUnitsSold |
+|--------|--------|
+|Global Distributors |3|   
+
+
 7. 🧠 *RETO 7: Clientes que nunca cancelaron pedidos*. Lista los clientes que no tienen ningún pedido con estado 'Cancelled'.
 
    
 **Solución** ✅
 
-   TODO script SQL
+   ```sql
+select c.name as customerName,
+    count(co.orderId) as totalOrders,
+    sum(case when co.status = 'cancelled' then 1 else 0 end) as cancelledOrders
+from customer c
+left join customerOrder co on c.customerId = co.customerId
+group by c.customerId, c.name
+having sum(case when co.status = 'cancelled' then 1 else 0 end) = 0
+order by totalOrders desc;
+   ```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| customerName | totalOrders | cancelledOrders |
+|--------|--------|--------|
+|Robert Brown| 2 |0|
+|John Smith| 1| 0|
+|Maria Garcia| 1| 0|
+|David Johnson| 1| 0|
+|Sarah Williams| 1| 0|
+|lisa martinez| 0 |0|
 
 8. 🧠 *RETO 8: Ingreso total por método de pago*. Muestra el ingreso total generado por cada método de pago.
 
@@ -209,5 +293,6 @@ select p.name as productName,
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
