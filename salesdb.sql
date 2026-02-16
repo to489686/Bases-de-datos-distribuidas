@@ -245,8 +245,7 @@ join customer c on co.customerid = c.customerid
 order by co.date desc;
 
 --10. *Clientes sin pedidos*. Lista los clientes que no han realizado ningún pedido.
-insert into customer values 
-(6, 'lisa martinez', '555-0106', 'lisa.martinez@email.com', 1);
+insert into customer values (6, 'lisa martinez', '555-0106', 'lisa.martinez@email.com', 1);
 
 select 
     c.name as customerName,
@@ -309,6 +308,75 @@ select p.name as productName,
             ) as totals
 		);
 
+--RETO 3: Total de ventas por ciudad*. Muestra el total de ventas (importe) agrupado por ciudad del cliente.
+select a.city as customerCity,
+    round(sum(co.total), 2) as totalSales
+from customer c
+join address a on c.addressId = a.addressId
+join customerorder co on c.customerId = co.customerId
+group by a.city
+order by totalSales desc;
+
+--*RETO 4: Clientes con más de una dirección*. Lista los clientes que tienen más de una dirección asociada.
+insert into address values (7, '456 delivery st', 'industrial', 'chicago', '60602', 'illinois');
+insert into customeraddress values (6, 2, 7, 'shipping', 'secondary');
+
+select c.name as customerName,
+    count(ca.addressId) as numberOfAddresses
+from customer c
+join customeraddress ca on c.customerId = ca.customerId
+group by c.customerId, c.name
+having count(ca.addressId) > 1
+order by numberOfAddresses desc;
+
+--*RETO 5: Pedidos con total superior al promedio*. Obtén los pedidos cuyo total sea mayor al promedio de todos los pedidos.
+select orderId,
+    customerId,
+    date,
+    round(total, 2) as orderTotal,
+    status
+from customerOrder
+where total > (select avg(total) from customerOrder)
+order by total desc;
+
+--RETO 6: Proveedor con más productos vendidos*. Identifica el proveedor cuyos productos se han vendido en mayor cantidad de unidades.
+-- Forma simple
+select s.name as supplierName,
+    sum(op.quanty) as totalUnitsSold
+from supplier s
+join product p on s.supplierId = p.supplierId
+join orderProduct op on p.productId = op.productId
+group by s.supplierId, s.name
+order by totalUnitsSold desc
+limit 1;
+-- Si se existieran dos o mas proveedor empatados
+select s.name as supplierName,
+    sum(op.quanty) as totalUnitsSold
+from supplier s
+join product p on s.supplierId = p.supplierId
+join orderProduct op on p.productId = op.productId
+group by s.supplierId, s.name
+having sum(op.quanty) = (
+    select max(unitsSold)
+    from (
+        select sum(op2.quanty) as unitsSold
+        from supplier s2
+        join product p2 on s2.supplierId = p2.supplierId
+        join orderProduct op2 on p2.productId = op2.productId
+        group by s2.supplierId
+    ) as supplierUnits
+)
+order by totalUnitsSold desc;
+
+--RETO 7: Clientes que nunca cancelaron pedidos*. Lista los clientes que no tienen ningún pedido con estado 'Cancelled'.
+select c.name as customerName,
+    count(co.orderId) as totalOrders,
+    sum(case when co.status = 'cancelled' then 1 else 0 end) as cancelledOrders
+from customer c
+left join customerOrder co on c.customerId = co.customerId
+group by c.customerId, c.name
+having sum(case when co.status = 'cancelled' then 1 else 0 end) = 0
+order by totalOrders desc;
 
 
 
