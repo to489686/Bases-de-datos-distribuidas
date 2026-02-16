@@ -278,23 +278,45 @@ order by totalRevenue desc;
    
 **Solución** ✅
 
-   TODO script SQL
-
+   ```sql
+select orderId,
+    count(distinct productId) as distinctProducts,
+    sum(quanty) as totalUnits
+from orderProduct
+group by orderId
+having count(distinct productId) > 1
+order by distinctProducts desc, totalUnits desc;
+   ```
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| orderId | distinctProducts | totalUnits |
+|--------|--------|--------|
+|1	|2	|5|
+|3	|2	|3|
 
 10. 🧠 *RETO 10: Clientes con pedidos en más de una ciudad*. Encuentra los clientes que hayan realizado pedidos desde direcciones en más de una ciudad.
 
 
 **Solución** ✅
 
-   TODO script SQL
+```sql
+select c.name as customerName,
+    count(distinct a.city) as numberOfCities,
+    group_concat(distinct a.city order by a.city separator ', ') as cities
+from customer c
+join customerOrder co on c.customerId = co.customerId
+join customerAddress ca on c.customerId = ca.customerId
+join address a on ca.addressId = a.addressId
+group by c.customerId, c.name
+having count(distinct a.city) > 1
+order by numberOfCities desc;
+```
 
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
-
+| customerName | numberOfCities | cities |
+|--------|--------|--------|
+|Robert Brown	|2	|Miami, Orlando|		
 
 📘 ¿Qué se refuerza?
 ✔ Lectura de esquemas
@@ -303,6 +325,7 @@ order by totalRevenue desc;
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
