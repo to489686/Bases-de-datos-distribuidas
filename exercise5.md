@@ -257,11 +257,21 @@ order by totalOrders desc;
    
 **Solución** ✅
 
-   TODO script SQL
-
+   ```sql
+select paymentmethod as paymentMethod,
+    count(orderid) as totalOrders,
+    round(sum(total), 2) as totalRevenue
+from customerOrder
+group by paymentMethod
+order by totalRevenue desc;
+   ```
 **Salida** 📌
 
-   TODO listado de atributos y tuplas
+| paymentMethod | totalOrders | totalOrders |
+|--------|--------|--------|
+|Credit Card| 4	|1293.69|
+|PayPal| 1 |199.99|
+|Bank Transfer| 1 |47.25|
 
 9. 🧠 *RETO 9: Pedidos con más de un producto distinto*. Lista los pedidos que incluyen más de un producto diferente.
 
@@ -293,6 +303,7 @@ order by totalOrders desc;
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
