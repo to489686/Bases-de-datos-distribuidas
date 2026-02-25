@@ -56,7 +56,42 @@ Fragmentos verticales
 
 **Script para crear fragmento** ✅
 
-   TODO script SQL
+   ```sql
+CREATE DATABASE IF NOT EXISTS customerDB;
+USE customerDB;
+
+CREATE TABLE customer (
+    customerID INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) DEFAULT NULL,
+    phone VARCHAR(20) DEFAULT NULL,
+    email VARCHAR(100) DEFAULT NULL,
+    addressID INT(11) DEFAULT NULL,
+    PRIMARY KEY (customerID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE customeraddress (
+    customerAddressID INT(11) NOT NULL AUTO_INCREMENT,
+    customerID INT(11) DEFAULT NULL,
+    addressID INT(11) DEFAULT NULL,
+    type VARCHAR(50) DEFAULT NULL,
+    position INT(11) DEFAULT NULL,
+    PRIMARY KEY (customerAddressID),
+    KEY customerID (customerID),
+    CONSTRAINT customeraddress_ibfk_1 FOREIGN KEY (customerID) REFERENCES customer (customerID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE customerorder (
+    orderID INT(11) NOT NULL AUTO_INCREMENT,
+    customerID INT(11) DEFAULT NULL,
+    date DATE DEFAULT NULL,
+    total DECIMAL(10,2) DEFAULT NULL,
+    paymentMethod VARCHAR(50) DEFAULT NULL,
+    status VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY (orderID),
+    KEY customerID (customerID),
+    CONSTRAINT customerorder_ibfk_1 FOREIGN KEY (customerID) REFERENCES customer (customerID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+   ```
 
 **Scripts para descargar los datos de la base de datos salesbd.** 📌
 
@@ -148,6 +183,7 @@ Fragmentos horizontales
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
