@@ -95,12 +95,61 @@ CREATE TABLE customerorder (
 
 **Scripts para descargar los datos de la base de datos salesbd.** 📌
 
-   TODO script SQL
+   ```sql
+USE bk_salesbd;
+-- Descargar customer
+SELECT * 
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customer.csv'
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM customer;
 
+-- Descargar customerAddress
+SELECT * 
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customerAddress.csv'
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM customeraddress;
+
+
+-- Descargar customerOrder
+SELECT * 
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customerOrder.csv'
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM customerorder;
+   ```
 **Scripts para cargar los datos al fragmento 1.** 📌
 
-   TODO script SQL
+   ```sql
+use customerDB;
+-- Cargar customer
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customer.csv'
+INTO TABLE customer
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 LINES; -- Si se hubieran descargado tambien las cabeceras seria 1 en ves de 0
 
+-- Cargar customerAddress
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customerAddress.csv'
+INTO TABLE customeraddress
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 LINES; -- Si se hubieran descargado tambien las cabeceras seria 1 en ves de 0
+
+-- Cargar customerOrder
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ExportacionesSalesDB/customerOrder.csv'
+INTO TABLE customerorder
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 LINES; -- Si se hubieran descargado tambien las cabeceras seria 1 en ves de 0
+   ```
    
 2. 🧠 *Fragmento supplierDB*. Construye un fragmento vertical que contenga todos los datos de supplier, pero sólo los de supplier.
    
@@ -183,6 +232,7 @@ Fragmentos horizontales
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
