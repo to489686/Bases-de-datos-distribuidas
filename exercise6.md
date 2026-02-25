@@ -52,7 +52,7 @@ Fragmentos verticales
    
 **Esquema del fragmento** ✅
 
-	TODO esquema
+![CustomerDB](CustomerDB.png)
 
 **Script para crear fragmento** ✅
 
@@ -148,6 +148,7 @@ Fragmentos horizontales
 ✔ Consultas tipo examen universitario / técnico
 
 Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+
 
 
 
