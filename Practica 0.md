@@ -1,10 +1,10 @@
 # Práctica 0 – Biblioteca
 ## Las 12 Reglas de las Bases de Datos Distribuidas (C. J. Date)
 
-**Asignatura:** Bases de Datos Distribuidas
-**Alumno:** Brandon Torres De Paz
-**No. Cuenta:** 489686
-**Fecha:** 05 de marzo del 2026
+- **Asignatura:** Bases de Datos Distribuidas
+- **Alumno:** Brandon Torres De Paz
+- **No. Cuenta:** 489686
+- **Fecha:** 05 de marzo del 2026
 
 ---
 
@@ -92,4 +92,5 @@ Idealmente, un sistema distribuido podría integrar nodos que utilicen distintos
 ![Imagen 1](Practica0Imagen1.jpeg)
 
 ![Imagen 2](Practica0Imagen2.jpeg)
+
 
