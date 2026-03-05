@@ -90,3 +90,6 @@ Idealmente, un sistema distribuido podría integrar nodos que utilicen distintos
 ## Evidencia 
 
 ![Imagen 1](Practica0Imagen1.jpeg)
+
+![Imagen 2](Practica0Imagen2.jpeg)
+
