@@ -73,7 +73,7 @@ To do this, execute the following statement to remove the constraint _customer_i
 
 Now, you can delete the _addressID_ column with the following script:
 ```sql
-    mysql> ALTER TABLE customer DROP COLUMN adressID;
+    mysql> ALTER TABLE customer DROP COLUMN addressID;
 ```
 
 These lab is based on the following relational model.
