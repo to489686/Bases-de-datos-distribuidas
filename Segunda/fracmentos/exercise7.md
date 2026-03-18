@@ -82,8 +82,7 @@ These lab is based on the following relational model.
 erDiagram
     customer {
         int customerID PK
-        string firstName
-        string lastName
+        string name
         string email
         string phone
     }
@@ -94,7 +93,6 @@ erDiagram
         string city
         string state
         string zipCode
-        string country
     }
 
     customerAddress {
@@ -157,8 +155,7 @@ erDiagram
 erDiagram
     customer {
     int customerID PK
-    string firstName
-    string lastName
+    string name
     string email
     string phone
     }
@@ -169,7 +166,6 @@ erDiagram
         string city
         string state
         string zipCode
-        string country
     }
 
     customerAddress {
@@ -228,7 +224,6 @@ To create the database tables, you must use the following commands:
                 city        VARCHAR(100)    NOT NULL,
                 state       VARCHAR(100)    NOT NULL,
                 zipCode     VARCHAR(20)     NOT NULL,
-                country     VARCHAR(100)    NOT NULL,
                 CONSTRAINT pk_address PRIMARY KEY (addressId)
             );
             
