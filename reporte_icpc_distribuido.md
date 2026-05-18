@@ -1,7 +1,7 @@
 # Reporte de práctica  
 # Implementación de una base de datos distribuida para ICPC México
 
-**Alumno:** Brandon Torres De Paz  
+**Alumnos:** Brandon Torres De Paz y Vladimir Islas Batalla
 **Proyecto:** Sistema ICPC Distribuido  
 **Tecnologías utilizadas:** MySQL 8.0, Docker, Docker Compose, ProxySQL, Python, Tkinter y PyMySQL  
 **Fecha:** Mayo de 2026
